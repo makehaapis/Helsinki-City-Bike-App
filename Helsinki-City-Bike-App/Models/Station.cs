@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Helsinki_City_Bike_App.Models
-{ }
+{
     public class Station
     {
         //Allow us to add primary key from csv.
