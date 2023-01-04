@@ -1,0 +1,60 @@
+﻿@page
+@model Helsinki_City_Bike_App.Pages.Stations.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Station[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Station[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Station[0].Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Station[0].Longitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Station[0].Latitude)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Station) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.StationID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.StationID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.StationID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

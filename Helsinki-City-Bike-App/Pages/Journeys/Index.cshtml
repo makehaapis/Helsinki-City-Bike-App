@@ -1,0 +1,66 @@
+﻿@page
+@model Helsinki_City_Bike_App.Pages.Journeys.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Journey[0].DepartureTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Journey[0].ReturnTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Journey[0].Distance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Journey[0].Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Journey[0].ReturnStation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Journey[0].DepartureStation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Journey) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Distance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnStation.StationID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureStation.StationID)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.JourneyID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.JourneyID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.JourneyID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
