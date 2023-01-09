@@ -8,42 +8,52 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Station</h4>
+    <h4>@Html.DisplayFor(model => model.Station.Name)</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.Station.Name)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Station.Name)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.Station.Address)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Station.Address)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.Station.Capacity)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Station.Capacity)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.Station.Longitude)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Station.Longitude)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.Station.Latitude)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Station.Latitude)
         </dd>
+        <dt class="col-sm-3">Total starts</dt>
+        <dd class="col-sm-9">@Model.DepartingJourneys.Count()</dd>
+        <dt class="col-sm-3">Total returns</dt>
+        <dd class="col-sm-9">@Model.ReturningJourneys.Count()</dd>
+        <dt class="col-sm-3">Average starting journey distance</dt>
+        <dd class="col-sm-9">@Model.AverageStartingJourneyDistance</dd>
+        <dt class="col-sm-3">Average returning journey distance</dt>
+        <dd class="col-sm-9">@Model.AverageReturnJourneyDistance</dd>
     </dl>
 </div>
+<iframe height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=@Model.Station.Address+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Station?.StationID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Station?.StationID" class="btn btn-primary">Edit</a>
+    <a asp-page="./Delete" asp-route-id="@Model.Station?.StationID" class="btn btn-danger">Delete</a>
+    <a asp-page="./Index" class="btn btn-primary">Back to List</a>
 </div>
