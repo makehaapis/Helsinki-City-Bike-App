@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AddDbContext") ?? throw new InvalidOperationException("Connection string 'AddDbContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext") ?? throw new InvalidOperationException("Connection string 'AddDbContext' not found.")));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
