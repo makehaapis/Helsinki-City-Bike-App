@@ -12,14 +12,14 @@ namespace Helsinki_City_Bike_App.Pages.Journeys
 {
     public class DetailsModel : PageModel
     {
-        private readonly Helsinki_City_Bike_App.Data.AppDbContext _context;
+        private readonly AppDbContext _context;
 
-        public DetailsModel(Helsinki_City_Bike_App.Data.AppDbContext context)
+        public DetailsModel(AppDbContext context)
         {
             _context = context;
         }
 
-      public Journey Journey { get; set; }
+        public Journey Journey { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,12 +28,12 @@ namespace Helsinki_City_Bike_App.Pages.Journeys
                 return NotFound();
             }
 
-            var journey = await _context.Journeys.FirstOrDefaultAsync(m => m.JourneyID == id);
+            var journey = await _context.Journeys.Include(j => j.ReturnStation).Include(j => j.DepartureStation).FirstOrDefaultAsync(m => m.JourneyID == id);
             if (journey == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Journey = journey;
             }
