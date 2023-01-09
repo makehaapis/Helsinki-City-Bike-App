@@ -2,65 +2,104 @@
 @model Helsinki_City_Bike_App.Pages.Journeys.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Journeys";
 }
 
-<h1>Index</h1>
+<h1>Journeys</h1>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <input type="text" name="SearchString" placeholder="Find by Station Name" value="@Model.CurrentFilter" />
+        <input type="submit" value="Filter" class="btn btn-primary" />
+        <a asp-page="./Index" class="btn btn-primary">Clear Filters</a>
+        <a asp-page="Create" class="btn btn-success">Create New</a>
+    </div>
+</form>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Journey[0].DepartureTime)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DepartureTimeSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Journeys[0].DepartureTime)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Journey[0].ReturnTime)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ReturnTimeSort" asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Journeys[0].ReturnTime)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Journey[0].Distance)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DistanceSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Journeys[0].Distance)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Journey[0].Duration)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DistanceSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Journeys[0].Duration)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Journey[0].ReturnStation)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DepartureStationSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    Departure Station
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Journey[0].DepartureStation)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ReturnStationSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    Return Station
+                </a>
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Journey) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartureTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReturnTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Distance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReturnStation.StationID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartureStation.StationID)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.JourneyID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.JourneyID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.JourneyID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Journeys)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Distance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureStation.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnStation.Name)
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.JourneyID" class="btn btn-primary">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@{
+    var prevDisabled = !Model.Journeys.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Journeys.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Journeys.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Journeys.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
