@@ -7,9 +7,13 @@ namespace Helsinki_City_Bike_App.Models
     {
         [Key]
         public int JourneyID { get; set; }
+        [Required]
         public DateTime DepartureTime { get; set; }
+        [Required]
         public DateTime ReturnTime { get; set; }
+        [Required]
         public int Distance { get; set; }
+        [Required]
         public float Duration { get; set; }
 
         [ForeignKey(nameof(ReturnStationID))]

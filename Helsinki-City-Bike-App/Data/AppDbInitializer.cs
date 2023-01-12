@@ -14,27 +14,20 @@ namespace Helsinki_City_Bike_App.Data
             context.Database.EnsureCreated();
             if (!context.Stations.Any())
             {
-                context.Stations.AddRange(new List<Station>()
+                var stations = CsvToStation.Stations();
+                foreach (var station in stations)
                 {
-                    new Station() {
-                        StationID = 501,
-                        Name = "Hanasaari",
-                        Address = "Hanasaarenranta 1",
-                        Capacity = 10,
-                        Longitude = "24.840319",
-                        Latitude = "60.16582"
-                    },
-                    new Station()
+                    try
                     {
-                        StationID = 503,
-                        Name = "Keilalahti",
-                        Address = "Keilalahdentie 2",
-                        Capacity = 28,
-                        Longitude = "24.840319",
-                        Latitude = "60.16582"
+                        context.Add(station);
+                        context.SaveChanges();
                     }
-                });
-                context.SaveChanges();
+                    catch (DbUpdateException)
+                    {
+                        context.Stations.Remove(station);
+                        continue;
+                    }
+                }
             }
 
             if (!context.Journeys.Any())
