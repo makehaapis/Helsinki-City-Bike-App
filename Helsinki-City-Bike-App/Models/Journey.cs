@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Helsinki_City_Bike_App.ModelValidations;
 
 namespace Helsinki_City_Bike_App.Models
 {
@@ -8,11 +9,14 @@ namespace Helsinki_City_Bike_App.Models
         [Key]
         public int JourneyID { get; set; }
         [Required]
+        [Journey_EnsureDepartureDateBeforeReturn]
         public DateTime DepartureTime { get; set; }
         [Required]
         public DateTime ReturnTime { get; set; }
         [Required]
+        [Journey_EnsureDistanceAtLeast10Meters]
         public int Distance { get; set; }
+        [Journey_EnsureDurationAtLeastTenSeconds]
         [Required]
         public float Duration { get; set; }
 
