@@ -2,13 +2,14 @@
 using Helsinki_City_Bike_App.Pages.Stations;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Transactions;
 
 namespace Helsinki_City_Bike_App.Data
 {
     public class AppDbInitializer
     {
         private static List<Journey> journeys;
-        public static void Seed(AppDbContext context)
+        public static async Task Seed(AppDbContext context)
         {
             context.Database.EnsureCreated();
             if (!context.Stations.Any())
@@ -18,37 +19,42 @@ namespace Helsinki_City_Bike_App.Data
                 {
                     try
                     {
-                        context.Add(station);
-                        context.SaveChanges();
+                        await context.AddAsync(station);
+                        await context.SaveChangesAsync();
                     }
                     catch (DbUpdateException)
                     {
+                        Console.WriteLine(station.Name);
                         context.Stations.Remove(station);
                         continue;
                     }
                 }
             }
 
-            int i = 0;
-
+            
             if (!context.Journeys.Any())
             {
+                context.ChangeTracker.AutoDetectChangesEnabled = false;
+                var watch = System.Diagnostics.Stopwatch.StartNew();
                 journeys = CsvToJourney.Journeys();
                 foreach (var item in journeys)
                 {
-                    i += 1;
                     try
                     {
-                        context.Journeys.Add(item);
-                        context.SaveChanges();
+                        await context.Journeys.AddAsync(item);
+                        await context.SaveChangesAsync();
                     }
                     catch (DbUpdateException)
                     {
                         context.Journeys.Remove(item);
                         continue;
                     }
-                    Console.WriteLine($"Where we at {i} / {journeys.Count()}");
                 }
+                watch.Stop();
+                Console.Write("This took: ");
+                Console.Write(watch.Elapsed.ToString());
+                Console.WriteLine("seconds");
+                context.ChangeTracker.AutoDetectChangesEnabled = true;
             }
         }
     }

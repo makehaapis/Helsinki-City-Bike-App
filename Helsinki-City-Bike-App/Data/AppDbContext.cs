@@ -18,7 +18,7 @@ namespace Helsinki_City_Bike_App.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Station>().HasMany(s => s.DepartingJourneys).WithOne(j => j.DepartureStation).OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<Station>().HasMany(s => s.ReturningJourneys).WithOne(j => j.ReturnStation).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Station>().HasMany(s => s.ReturningJourneys).WithOne(j => j.ReturnStation).OnDelete(DeleteBehavior.NoAction);            
         }
     }
 }

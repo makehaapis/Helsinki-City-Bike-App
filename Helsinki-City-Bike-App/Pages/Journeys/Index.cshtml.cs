@@ -13,6 +13,7 @@ namespace Helsinki_City_Bike_App.Pages.Journeys
     public class IndexModel : PageModel
     {
         private readonly AppDbContext _context;
+
         public IndexModel(AppDbContext context)
         {
             _context = context;
@@ -101,6 +102,7 @@ namespace Helsinki_City_Bike_App.Pages.Journeys
                     journeysIQ = journeysIQ.OrderBy(j => j.JourneyID);
                     break;
             }
+
             var pageSize = 20;
             Journeys = await PaginatedList<Journey>.CreateAsync(
                 journeysIQ.Include(j => j.DepartureStation).Include(j => j.ReturnStation).AsNoTracking(), pageIndex ?? 1, pageSize);

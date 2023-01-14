@@ -10,7 +10,7 @@ namespace Helsinki_City_Bike_App.Data
             var stations = new List<Station>();
             try
             {
-                using (var reader = new StreamReader("stations.csv"))
+                using (var reader = new StreamReader("Helsingin_ja_Espoon_kaupunkipy%C3%B6r%C3%A4asemat_avoin.csv"))
                 {
                     string header = reader.ReadLine();
                     string line;

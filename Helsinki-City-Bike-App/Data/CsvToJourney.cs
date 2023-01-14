@@ -1,4 +1,5 @@
 ﻿using Helsinki_City_Bike_App.Models;
+using System.Drawing.Printing;
 using System.Text.RegularExpressions;
 
 namespace Helsinki_City_Bike_App.Data
@@ -11,8 +12,8 @@ namespace Helsinki_City_Bike_App.Data
             var journeyFiles = new List<string>
             {
                 "2021-05.csv",
-                //"2021-06.csv",
-                //"2021-07.csv"
+                "2021-06.csv",
+                "2021-07.csv"
             };
 
             foreach (string file in journeyFiles)
