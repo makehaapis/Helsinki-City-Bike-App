@@ -1,0 +1,7 @@
+﻿version: "3.9"  # optional since v1.27.0
+services:
+  webapp:
+    image: helsinki_city_bike_database_seeder_docker
+    container_name: webapplication
+    ports:
+      - "80:80"

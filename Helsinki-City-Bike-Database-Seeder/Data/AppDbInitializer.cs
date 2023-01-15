@@ -1,10 +1,8 @@
-﻿using Helsinki_City_Bike_App.Models;
-using Helsinki_City_Bike_App.Pages.Stations;
-using Microsoft.Data.SqlClient;
+﻿using Helsinki_City_Bike_Database_Seeder.Models;
+using Helsinki_City_Bike_Database_Seeder.ModelValidations;
 using Microsoft.EntityFrameworkCore;
-using System.Transactions;
 
-namespace Helsinki_City_Bike_App.Data
+namespace Helsinki_City_Bike_Database_Seeder.Data
 {
     public class AppDbInitializer
     {
@@ -31,23 +29,25 @@ namespace Helsinki_City_Bike_App.Data
                 }
             }
 
-            
             if (!context.Journeys.Any())
             {
                 context.ChangeTracker.AutoDetectChangesEnabled = false;
                 var watch = System.Diagnostics.Stopwatch.StartNew();
                 journeys = CsvToJourney.Journeys();
-                foreach (var item in journeys)
+                foreach (var journey in journeys)
                 {
-                    try
-                    {
-                        await context.Journeys.AddAsync(item);
-                        await context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateException)
-                    {
-                        context.Journeys.Remove(item);
-                        continue;
+                    if (ValidateCsvJourney.ValidateJourney(journey))
+                    { 
+                        try
+                        {
+                            await context.Journeys.AddAsync(journey);
+                            await context.SaveChangesAsync();
+                        }
+                        catch (DbUpdateException)
+                        {
+                            context.Journeys.Remove(journey);
+                            continue;
+                        }
                     }
                 }
                 watch.Stop();

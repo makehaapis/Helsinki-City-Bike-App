@@ -1,26 +1,30 @@
-﻿using Helsinki_City_Bike_App.Models;
-using System.Drawing.Printing;
+﻿using Helsinki_City_Bike_Database_Seeder.Models;
+using System.Net;
 using System.Text.RegularExpressions;
 
-namespace Helsinki_City_Bike_App.Data
+namespace Helsinki_City_Bike_Database_Seeder.Data
 {
     public class CsvToJourney
     {
         public static List<Journey> Journeys()
         {
             var journeys = new List<Journey>();
-            var journeyFiles = new List<string>
+            var journeyUrls = new List<string>
             {
-                "2021-05.csv",
-                "2021-06.csv",
-                "2021-07.csv"
+                "https://dev.hsl.fi/citybikes/od-trips-2021/2021-05.csv",
+                "https://dev.hsl.fi/citybikes/od-trips-2021/2021-06.csv",
+                "https://dev.hsl.fi/citybikes/od-trips-2021/2021-07.csv"
             };
 
-            foreach (string file in journeyFiles)
+
+
+            foreach (string journeyurl in journeyUrls)
             {
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(journeyurl);
+                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
                 try
                 {
-                    using (var reader = new StreamReader(file))
+                    using (var reader = new StreamReader(resp.GetResponseStream()))
                     {
 
                         string header = reader.ReadLine();

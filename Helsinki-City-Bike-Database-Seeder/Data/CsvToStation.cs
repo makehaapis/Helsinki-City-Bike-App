@@ -1,16 +1,20 @@
-﻿using Helsinki_City_Bike_App.Models;
+﻿using Helsinki_City_Bike_Database_Seeder.Models;
+using System.Net;
 using System.Text.RegularExpressions;
 
-namespace Helsinki_City_Bike_App.Data
+namespace Helsinki_City_Bike_Database_Seeder.Data
 {
     public class CsvToStation
     {
         public static List<Station> Stations()
         {
             var stations = new List<Station>();
+            var stationUrl = "https://opendata.arcgis.com/datasets/726277c507ef4914b0aec3cbcfcbfafc_0.csv";
             try
             {
-                using (var reader = new StreamReader("Helsingin_ja_Espoon_kaupunkipy%C3%B6r%C3%A4asemat_avoin.csv"))
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(stationUrl);
+                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                using (var reader = new StreamReader(resp.GetResponseStream()))
                 {
                     string header = reader.ReadLine();
                     string line;
