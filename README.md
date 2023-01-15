@@ -26,6 +26,21 @@ You can find my demo of this project running as Azure Web App Here:
 
 If you want to build this solution, follow this tutorial.
 
-Prerequisites:
+<h2>Prerequisites:</h2>
+
++ Make sure you have .NET 7.0 SDK installed or Download here: https://dotnet.microsoft.com/en-us/download
 + I recommend to use Visual Studio 2022 as IDE. Download here: https://visualstudio.microsoft.com/
-+ Make sure you have .NET 7.0 installed or Download here: https://dotnet.microsoft.com/en-us/download
++ When installing Visual Studio install ASP.NET workloads:
+![Näyttökuva (240)](https://user-images.githubusercontent.com/55025026/212563331-cb5d4748-13e6-4de6-874b-8f474b52823a.png)
+
+<h2>Build:</h2>
+
+Start visual studio community 2022 and you can download this repository straight to IDE:
+
+![Näyttökuva (241)](https://user-images.githubusercontent.com/55025026/212563600-cdc574e4-9434-4a11-acc3-26ddd90d8d2b.png)
+
+Add reposity url in the field and choose where you want to download it:
+![Näyttökuva (242)](https://user-images.githubusercontent.com/55025026/212563759-047dd38a-4ceb-4cb4-bb0f-545de96b19c3.png)
+
+
+
