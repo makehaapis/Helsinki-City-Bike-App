@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Helsinki_City_Bike_App.Data;
 using Helsinki_City_Bike_App.Models;
+using Helsinki_City_Bike_App.ModelValidations;
 
 namespace Helsinki_City_Bike_App.Pages.Journeys
 {
@@ -30,7 +31,7 @@ namespace Helsinki_City_Bike_App.Pages.Journeys
         public PaginatedList<Journey> Journeys { get; set; }
 
 
-        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
+        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex, string departuredatestring, string returndatestring)
         {
             CurrentSort = sortOrder;
             DepartureTimeSort = sortOrder == "DepartureTime" ? "departure_date_desc" : "DepartureTime";
@@ -54,11 +55,52 @@ namespace Helsinki_City_Bike_App.Pages.Journeys
             IQueryable<Journey> journeysIQ = from j in _context.Journeys
                                              select j;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString) && String.IsNullOrEmpty(departuredatestring) && String.IsNullOrEmpty(returndatestring))
             {
-                journeysIQ = journeysIQ.Where(j => j.ReturnStation.Name.Contains(searchString) && j.DepartureTime == DateTime.Parse("2021-05-31T22:32:41")
+                journeysIQ = journeysIQ.Where(j => j.ReturnStation.Name.Contains(searchString)
                                        || j.DepartureStation.Name.Contains(searchString));
             }
+
+            else if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(departuredatestring) && String.IsNullOrEmpty(returndatestring))
+            {
+                if (DateTime.TryParse(departuredatestring, out var dateTime))
+                {
+                    journeysIQ = journeysIQ.Where(j => j.DepartureTime > dateTime).Where(j => j.ReturnStation.Name.Contains(searchString) || j.DepartureStation.Name.Contains(searchString));
+                }
+            }
+
+            else if (String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(departuredatestring) && String.IsNullOrEmpty(returndatestring))
+            {
+                if (DateTime.TryParse(departuredatestring, out var dateTime))
+                {
+                    journeysIQ = journeysIQ.Where(j => j.DepartureTime > dateTime);
+                }
+            }
+
+            else if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(departuredatestring) && !String.IsNullOrEmpty(returndatestring))
+            {
+                if (DateTime.TryParse(departuredatestring, out var departureTime) && DateTime.TryParse(returndatestring,out var returnTime))
+                {
+                    journeysIQ = journeysIQ.Where(j => j.DepartureTime > departureTime).Where(j => j.ReturnTime < returnTime).Where(j => j.ReturnStation.Name.Contains(searchString) || j.DepartureStation.Name.Contains(searchString));
+                }
+            }
+
+            else if(!String.IsNullOrEmpty(searchString) && String.IsNullOrEmpty(departuredatestring) && !String.IsNullOrEmpty(returndatestring)) 
+            {
+                if (DateTime.TryParse(returndatestring, out var returnTime))
+                {
+                    journeysIQ = journeysIQ.Where(j => j.ReturnTime < returnTime).Where(j => j.ReturnStation.Name.Contains(searchString) || j.DepartureStation.Name.Contains(searchString));
+                }
+            }
+
+            else if(String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(departuredatestring) && !String.IsNullOrEmpty(returndatestring))
+            {
+                if (DateTime.TryParse(departuredatestring, out var departureTime) && DateTime.TryParse(returndatestring, out var returnTime))
+                {
+                    journeysIQ = journeysIQ.Where(j => j.DepartureTime > departureTime).Where(j => j.ReturnTime < returnTime);
+                }
+            }
+        
 
             switch (sortOrder)
             {

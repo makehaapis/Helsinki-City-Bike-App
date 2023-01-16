@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Helsinki_City_Bike_Database_Seeder.ModelValidations;
+
 namespace Helsinki_City_Bike_Database_Seeder.Models
 {
     public class Journey
