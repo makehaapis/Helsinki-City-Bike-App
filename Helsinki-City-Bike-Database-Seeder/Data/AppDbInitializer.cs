@@ -1,6 +1,7 @@
 ﻿using Helsinki_City_Bike_Database_Seeder.Models;
 using Helsinki_City_Bike_Database_Seeder.ModelValidations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace Helsinki_City_Bike_Database_Seeder.Data
 {
