@@ -8,7 +8,14 @@
 <h1>Journeys</h1>
 <form asp-page="./Index" method="get">
     <div class="form-actions no-color">
-        <input type="text" name="SearchString" placeholder="Find by Station Name" value="@Model.CurrentFilter" />
+        <input type="text" name="SearchString" placeholder="Find by Station Name" value="@Model.CurrentFilter"/>
+        <br>
+        <br>
+        <p>Filter by Departure Dates:</p>
+        <input type="datetime-local" name="departuredatestring" value="2021-05-31T18:00"/>
+        <p>Filter by Return Time</p>
+        <input type="datetime-local" name="returndatestring" value="2021-05-31T18:00" />
+        <br>
         <input type="submit" value="Filter" class="btn btn-primary" />
         <a asp-page="./Index" class="btn btn-primary">Clear Filters</a>
         <a asp-page="Create" class="btn btn-success">Create New</a>
