@@ -34,35 +34,27 @@ namespace Helsinki_City_Bike_App.Pages.Stations
             {
                 return NotFound();
             }
-            Station = await _context.Stations.Include(s => s.ReturningJourneys).Include(s => s.DepartingJourneys).FirstOrDefaultAsync(m => m.StationID == id);
-            if (Station == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                Station = Station;
-                DepartingJourneys = _context.Journeys.Where(j => j.DepartureStationID.Equals(id)).ToList();
-                ReturningJourneys = _context.Journeys.Where(j => j.ReturnStationID.Equals(id)).ToList();
+            Station = await _context.Stations.FirstOrDefaultAsync(m => m.StationID == id);
+            DepartingJourneys = _context.Journeys.Where(j => j.DepartureStationID.Equals(id)).ToList();
+            ReturningJourneys = _context.Journeys.Where(j => j.ReturnStationID.Equals(id)).ToList();
 
-                if (DepartingJourneys.Count() > 0)
+            if (DepartingJourneys.Count() > 0)
+            {
+                foreach (var item in DepartingJourneys)
                 {
-                    foreach (var item in DepartingJourneys)
-                    {
-                        TotalStartingJourneyDistance += item.Distance;
-                    }
-                    AverageStartingJourneyDistance = TotalStartingJourneyDistance / DepartingJourneys.Count();
+                    TotalStartingJourneyDistance += item.Distance;
                 }
-
-                if (ReturningJourneys.Count() > 0)
-                {
-                    foreach (var item in ReturningJourneys)
-                    {
-                        TotalReturningJourneyDistance += item.Distance;
-                    }
-                    AverageReturnJourneyDistance = TotalReturningJourneyDistance / ReturningJourneys.Count();
-                }
+                AverageStartingJourneyDistance = TotalStartingJourneyDistance / DepartingJourneys.Count();
             }
+
+            if (ReturningJourneys.Count() > 0)
+            {
+                foreach (var item in ReturningJourneys)
+                {
+                    TotalReturningJourneyDistance += item.Distance;
+                }
+                AverageReturnJourneyDistance = TotalReturningJourneyDistance / ReturningJourneys.Count();
+                }
             return Page();
         }
     }
