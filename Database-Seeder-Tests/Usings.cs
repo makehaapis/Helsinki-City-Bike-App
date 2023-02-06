@@ -1,0 +1,4 @@
+global using NUnit.Framework;
+global using Helsinki_City_Bike_Database_Seeder;
+global using Helsinki_City_Bike_Database_Seeder.Models;
+global using Helsinki_City_Bike_Database_Seeder.ModelValidations;

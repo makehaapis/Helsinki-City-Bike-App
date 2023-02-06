@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helsinki-City-Bike-App", "Helsinki-City-Bike-App\Helsinki-City-Bike-App.csproj", "{CF1B03D3-0991-42D5-99C7-F316D363ABD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helsinki-City-Bike-Database-Seeder", "Helsinki-City-Bike-Database-Seeder\Helsinki-City-Bike-Database-Seeder.csproj", "{43BCCF8E-E5A1-440B-A2A3-2140CB175395}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helsinki-City-Bike-Database-Seeder", "Helsinki-City-Bike-Database-Seeder\Helsinki-City-Bike-Database-Seeder.csproj", "{43BCCF8E-E5A1-440B-A2A3-2140CB175395}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database-Seeder-Tests", "Database-Seeder-Tests\Database-Seeder-Tests.csproj", "{65ADCB80-0588-4BA8-949C-B09575A14AFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{43BCCF8E-E5A1-440B-A2A3-2140CB175395}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43BCCF8E-E5A1-440B-A2A3-2140CB175395}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43BCCF8E-E5A1-440B-A2A3-2140CB175395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65ADCB80-0588-4BA8-949C-B09575A14AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65ADCB80-0588-4BA8-949C-B09575A14AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65ADCB80-0588-4BA8-949C-B09575A14AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65ADCB80-0588-4BA8-949C-B09575A14AFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
