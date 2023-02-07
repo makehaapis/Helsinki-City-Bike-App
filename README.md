@@ -68,3 +68,11 @@ Right click the Helsinki-City-Bike-App in solution explorer and left click "Set 
 ![Näyttökuva (266)](https://user-images.githubusercontent.com/55025026/214263310-e54a3b20-a352-47e7-9a85-0c8e8ff1e937.png)
 
 And run the app with http or https protocol. Server will start now and visual studio opens the build app in web browser.
+
+
+<h1>How To Run Tests</h1>
+
+You can run NUnit tests by clicking Test -> Run All Tests
+![Näyttökuva (271)](https://user-images.githubusercontent.com/55025026/216923437-b07fd7ca-90dd-431c-a1a0-3fb02a577e05.png)
+
+
