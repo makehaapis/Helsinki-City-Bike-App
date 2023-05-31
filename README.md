@@ -22,7 +22,7 @@ There are two projects in this solution.
 I chose to to make Database-Seeder app separately because that way I could run it in azure container image. I have SQL server on Azure and Database seeding with over 3 million journeys was time consuming so it was better to run app in cloud as container image.
 
 You can find my demo of this project running as Azure Web App Here:
-+ https://helsinki-city-bike-app.azurewebsites.net/
++ https://helsinki-city-bike-app.azurewebsites.net/***** CURRENTLY NOT RUNNING ON AZURE
 
 <h1>How To Build</h1>
 
